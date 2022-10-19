@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h3 class="text-center">Login</h3>
+        <form [formGroup]="loginform" (ngSubmit)="onSubmit(loginform)">
+            <label for="email"></label>
+            <input
+              type="text"
+              formControlName="email"
+              name="email"
+              id="email"
+              class="form-control"
+              placeholder="Enter Email"
+            />
+            <div
+              *ngIf="f.email.touched && f.email.errors?.['required']"
+              class="text-danger"
+            >
+              Required
+            </div>
+            <div *ngIf="f.email.touched && f.email.errors?.['email']" class="text-danger">
+              Invalid email
+            </div>
+            <label for="password"></label>
+            <input
+              type="password"
+              formControlName="password"
+              name="password"
+              id="password"
+              class="form-control"
+              placeholder=" Enter Password"
+            />
+            <div
+              *ngIf="f.password.touched && f.password.errors?.['required']"
+              class="text-danger"
+            >
+              Required
+            </div>
+          
+            
+          
+                <button [disabled]="loginform.invalid" class="btn btn-primary mt-4 w-100"  >Login</button>
+
+          </form>
+
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+
+

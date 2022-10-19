@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h3 class="text-center">Registration Form</h3>
+        <form [formGroup]="registerform" (ngSubmit)="onSubmit(registerform)">
+            <label for="fullName"></label>
+            <input
+              type="text"
+              formControlName="fullName"
+              name="fullName"
+              id="fullName"
+              class="form-control"
+              placeholder="Enter Fullname"
+            />
+            <div
+              *ngIf=" (f.fullName.dirty || f.fullName.touched) && f.fullName.errors?.['required']"
+              class="text-danger"
+            >
+              Required
+            </div>
+            <label for="userName"></label>
+            <input
+              type="text"
+              formControlName="userName"
+              name="userName"
+              id="userName"
+              class="form-control"
+              placeholder="Enter Username"
+            />
+            <div
+              *ngIf="f.userName.touched && f.userName.errors?.['required']"
+              class="text-danger"
+            >
+              Required
+            </div>
+            <div *ngIf="f.userName.touched && f.userName.errors?.['pattern']" class="text-danger">
+             Invalid username
+              </div>
+            <label for="email"></label>
+            <input
+              type="text"
+              formControlName="email"
+              name="email"
+              id="email"
+              class="form-control"
+              placeholder="Enter Email"
+            />
+            <div
+              *ngIf="f.email.touched && f.email.errors?.['required']"
+              class="text-danger"
+            >
+              Required
+            </div>
+            <div *ngIf="f.email.touched && f.email.errors?.['email']" class="text-danger">
+              Invalid email
+            </div>
+            <label for="password"></label>
+            <input
+              type="password"
+              formControlName="password"
+              name="password"
+              id="password"
+              class="form-control"
+              placeholder=" Enter Password"
+            />
+            <div
+              *ngIf="f.password.touched && f.password.errors?.['required']"
+              class="text-danger"
+            >
+              Required
+            </div>
+            <div *ngIf="f.password.touched && f.password.errors?.['pattern']" class="text-danger">
+              Password must contain min 8 characters including 1 special
+                        character, 1 uppercase and 1 lowercase character
+            </div>
+            <label for="number"></label>
+            <input
+              type="number"
+              formControlName="phone"
+              name="phone"
+              id="phone"
+              class="form-control"
+              placeholder=" Enter Number"
+            />
+            <div
+            *ngIf="f.phone.touched && f.phone.errors?.['required']"
+            class="text-danger"
+          >
+            Required
+          </div>
+          <div *ngIf="f.phone.touched && f.phone.errors?.['pattern']" class="text-danger">
+             Phone Number must contain 10 digits
+            </div>
+                <button [disabled]="registerform.invalid" class="btn btn-primary mt-4 w-100" >Submit</button>
+
+          </form>
+
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+
+

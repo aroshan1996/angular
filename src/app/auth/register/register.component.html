@@ -1,0 +1,19 @@
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+<button class="btn btn-primary" [disabled]="toggle" (click)="sayhi()">Submit</button>
+
+<div *ngIf="a">
+<ul *ngFor="let item of a">
+  <li>{{item.id}}</li>
+  <li>{{item.name}}</li>
+</ul>
+
+</div>
+
+  </div>
