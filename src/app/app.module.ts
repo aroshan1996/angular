@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CategoryComponent } from './category/category.component';
     SampleComponent,
     HeaderComponent,
     DashboardComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, BehaviorSubject, tap } from 'rxjs';
+import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,18 +13,19 @@ export class AuthService {
 
   private user$: Subject<any> = new Subject<any>();
   user = this.user$.asObservable();
-  show: boolean = false;
   getUsers() {
     return this.http.get(this.rootUrl + 'users');
   }
 
   createUser(data: object) {
-    return this.http.post(this.apiurl + 'register', data);
+    return this.http.post(environment.baseurl + 'register', data);
+  }
+  
+  getuser(value: boolean) {
+    return this.user$.next(value);
   }
 
-  
   getToken(data: object) {
-    this.user$.next(data);
-    return this.http.post(this.apiurl + 'auth/token', data);
+    return this.http.post(environment.baseurl + 'auth/token', data);
   }
 }

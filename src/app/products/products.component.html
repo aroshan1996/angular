@@ -1,0 +1,38 @@
+    <div class="row m-2">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control me-2" placeholder="Search">
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="button">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+              </div>
+
+        </div>
+
+
+    </div>
+
+
+<div *ngIf="productlist">
+  <div class="row ">
+    <div *ngFor="let product of productlist; let i = index" class="col-md-4 card mb-3">
+        <!-- <div class="card" > -->
+          <img
+            class="card-img-top"
+            src="{{ baseurl + product?.thumbnail }}"
+            alt="Card image cap"
+          />
+          <div class="card-body ">
+            <div class="d-flex justify-content-between">
+                <p class="card-text">{{ product?.price | currency:'INR' }}</p>
+                <button class="btn btn-primary">Add to Cart</button>
+            </div>
+            
+          </div>
+        <!-- </div> -->
+    </div>
+  </div>
+</div>

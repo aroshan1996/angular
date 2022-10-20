@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   });
+ 
 
   constructor(private authservice: AuthService, private route: Router) {}
 
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
     }
     this.authservice.getToken(form.value).subscribe((response: any) => {
       localStorage.setItem('token', JSON.stringify(response?.token));
-      this.route.navigate(['dashboard'])
+      this.authservice.getuser(true)
+      this.route.navigate(['dashboard']);
     }),
       (err: any) => {
         return err;

@@ -1,9 +1,10 @@
 <div *ngIf="categories">
     <div *ngFor="let category of categories">
-        <ul class="cglist">
-            <li>
-                {{category}}
+        <ul class="list-group">
+            <li class=" list-group-item list-group-item-action">
+                {{category | titlecase}}
             </li>
         </ul>
+       
     </div>
 </div>

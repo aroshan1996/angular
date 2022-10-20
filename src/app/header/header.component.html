@@ -25,7 +25,7 @@
           </li>
           <li class="nav-item">
             <div *ngIf="user">
-              <a class="nav-link" (click)="logout()">Logout </a>
+              <a class="nav-link" routerLink="" (click)="logout()">Logout </a>
             </div>
             <div *ngIf="!user">
               <a class="nav-link" routerLink="auth/login">Login </a>
