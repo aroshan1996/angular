@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonserviceService } from '../commonservice.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 interface ProductItem {
   _id: string;
@@ -20,20 +21,41 @@ interface Product extends Array<ProductItem> {}
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
+  @Input() id: string = '';
+  @Input() maxSize: number = 0;
+  @Output() pageChange: EventEmitter<number> = new EventEmitter();
+  @Output() pageBoundsCorrection: EventEmitter<number> | undefined;
   category: string = '';
   price: number = 0;
-  skip: number = 0;
-  page: number = 0;
+  size: number = 5;
+  page: number = 1;
+  count:number=0
   productlist: Product = [];
   baseurl = environment.imageurl;
 
-  constructor(private services: CommonserviceService) {}
+  constructor(private services: CommonserviceService,private route:Router) {}
 
   ngOnInit(): void {
     this.services
-      .getProducts(this.category, this.price, this.page, this.skip)
+      .getProducts(this.category, this.price, this.page, this.size)
       .subscribe((response: any) => {
         this.productlist = response.products;
+        this.count= response.count
       });
+  }
+
+  pageChanged(event:any){
+  this.page= event
+  this.services
+      .getProducts(this.category, this.price, this.page, this.size)
+      .subscribe((response: any) => {
+        this.productlist = response.products;
+        this.count= response.count
+      });
+  }
+
+  productdetail(id:any){
+this.route.navigate(['/product',id])
+
   }
 }

@@ -13,7 +13,7 @@ export class CommonserviceService {
     return this.http.get(environment.baseurl + 'getcategories');
   }
 
-  getProducts(category: string, page: number, size: number, price: number) {
+  getProducts(category: string,price: number, page: number, size: number, ) {
     // if (page) {
     //   return this.http.get(
     //     environment.baseurl +
@@ -29,6 +29,11 @@ export class CommonserviceService {
     //   }
     // }
 
-    return this.http.get(environment.baseurl + 'listallproducts');
+    return this.http.get(environment.baseurl + `listallproducts?page=${page}&size=${size}`);
   }
+
+fetchproduct(id:any){
+return this.http.get(environment.baseurl+`product/${id}`)
+}
+
 }

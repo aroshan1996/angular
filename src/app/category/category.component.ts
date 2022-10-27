@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CommonserviceService } from '../commonservice.service';
 
@@ -9,11 +10,16 @@ import { CommonserviceService } from '../commonservice.service';
 })
 export class CategoryComponent implements OnInit {
   categories: string[] = [];
-  constructor(private commonservice: CommonserviceService) {}
+  constructor(
+    private commonservice: CommonserviceService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
-    this.commonservice.getCategories().subscribe((response:any) => {
-      this.categories= response.categories
+    this.commonservice.getCategories().subscribe((response: any) => {
+      this.categories = response.categories;
     });
   }
+
+  
 }

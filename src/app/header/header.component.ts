@@ -9,21 +9,28 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  loggedIn:any=false;
-  
+  loggedIn: any = false;
+
   user!: Observable<boolean>;
   constructor(public authservice: AuthService, private route: Router) {}
 
   ngOnInit(): void {
-  
-    this.authservice.user.subscribe(data=>{
-      this.user=data
-      })
-    
+    this.authservice.user.subscribe((data) => {
+      this.user = data;
+    });
+    this.maintain();
   }
+
+  maintain() {
+    if (localStorage.getItem('token')) {
+      this.authservice.getuser(true);
+    }
+  }
+
   logout() {
-    this.user=this.loggedIn
+    this.user = this.loggedIn;
     localStorage.removeItem('token');
-    this.route.navigate(['auth/register'])
+    this.route.navigate(['auth/register']);
   }
 }
+

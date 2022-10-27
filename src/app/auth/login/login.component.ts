@@ -35,4 +35,8 @@ export class LoginComponent implements OnInit {
         return err;
       };
   }
+
+  navigate(){
+    this.route.navigate(['auth/forgotpassword'])
+  }
 }

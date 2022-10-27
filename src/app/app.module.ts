@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthModule } from './auth/auth.module';
 import { SampleComponent } from './sample/sample.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductsComponent } from './products/products.component';
+import { ProddetailsComponent } from './proddetails/proddetails.component';
 
 @NgModule({
   declarations: [
@@ -19,16 +21,17 @@ import { ProductsComponent } from './products/products.component';
     HeaderComponent,
     DashboardComponent,
     CategoryComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProddetailsComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    HttpClientModule
-
+    HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
