@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -7,6 +7,13 @@ import { environment } from 'src/environments/environment';
 })
 export class CommonserviceService {
   apiurl = 'http://localhost:3000/api/';
+  // headers={
+  //   Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
+  // }
+   headers = new HttpHeaders({
+    // 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token')!)}`
+  })
   constructor(private http: HttpClient) {}
 
   getCategories() {
@@ -34,6 +41,14 @@ export class CommonserviceService {
 
 fetchproduct(id:any){
 return this.http.get(environment.baseurl+`product/${id}`)
+}
+
+addtoCart(data:any){
+  return this.http.post(environment.baseurl +'addcart',data,{headers:this.headers})
+}
+
+getcart(id:any){
+return this.http.get(environment.baseurl+`mycart/${id}`,{headers:this.headers})
 }
 
 }

@@ -25,13 +25,13 @@
                   totalItems: count
                 };
           let i = index
-        " class="col-md-4 card mb-3 w-25 me-5" (click)="productdetail(product?._id)">
-        <img class="card-img-top" src="{{ baseurl + product?.thumbnail }}" alt="Card image cap" />
+        " class="col-md-4 card mb-3 w-25 me-5" >
+        <img class="card-img-top" src="{{ baseurl + product?.thumbnail }}" alt="Card image cap" (click)="productdetail(product?._id)" />
         <div class="card-body">
           <p>{{ product?.productName }}</p>
           <div class="d-flex justify-content-between">
             <p class="card-text">{{ product?.price | currency: "INR" }}</p>
-            <button class="btn btn-primary">Add to Cart</button>
+            <button class="btn btn-primary" (click)="cart(product?._id)">Add to Cart</button>
           </div>
         </div>
       </div>

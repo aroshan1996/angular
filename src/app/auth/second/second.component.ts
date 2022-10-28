@@ -13,8 +13,9 @@ submitted=false
 registerform = new FormGroup({
 fullName:new FormControl('',Validators.required),
 email: new FormControl("",[Validators.required,Validators.email]),
-userName:new FormControl("",[Validators.required,Validators.pattern('^(?![0-9]+$)[a-zA-Z0-9 ]{2,}$')]),
+userName:new FormControl("",[Validators.required,Validators.pattern('^(?![0-9]+$)[a-zA-Z0-9\w_ ]{2,}$')]),
 phone:new FormControl("",[Validators.required,Validators.pattern('[- +()0-9]{10}')]),
+role:new FormControl('',Validators.required),
 password: new FormControl("",[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')])
 })
   constructor(private auth : AuthService, private router: Router ) { }

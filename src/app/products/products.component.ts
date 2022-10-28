@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonserviceService } from '../commonservice.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import decode from 'jwt-decode';
 
 interface ProductItem {
   _id: string;
@@ -29,33 +30,44 @@ export class ProductsComponent implements OnInit {
   price: number = 0;
   size: number = 5;
   page: number = 1;
-  count:number=0
+  count: number = 0;
   productlist: Product = [];
   baseurl = environment.imageurl;
+  userid: any = decode(localStorage.getItem('token')!);
 
-  constructor(private services: CommonserviceService,private route:Router) {}
+  constructor(private services: CommonserviceService, private route: Router) {}
 
   ngOnInit(): void {
     this.services
       .getProducts(this.category, this.price, this.page, this.size)
       .subscribe((response: any) => {
         this.productlist = response.products;
-        this.count= response.count
+        this.count = response.count;
       });
   }
 
-  pageChanged(event:any){
-  this.page= event
-  this.services
+  pageChanged(event: any) {
+    this.page = event;
+    this.services
       .getProducts(this.category, this.price, this.page, this.size)
       .subscribe((response: any) => {
         this.productlist = response.products;
-        this.count= response.count
+        this.count = response.count;
       });
   }
 
-  productdetail(id:any){
-this.route.navigate(['/product',id])
+  productdetail(id: any) {
+    this.route.navigate(['/product', id]);
+  }
 
+  cart(id: any) {
+    let data = {
+      productid: id,
+      userid: this.userid.id,
+    };
+
+    this.services.addtoCart(data).subscribe((response: any) => {
+      console.log(response);
+    });
   }
 }

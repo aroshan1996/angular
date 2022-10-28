@@ -91,6 +91,19 @@
           <div *ngIf="f.phone.touched && f.phone.errors?.['pattern']" class="text-danger">
              Phone Number must contain 10 digits
             </div>
+
+            <label for="role"></label>
+            <select class="form-select" aria-label="Default select example" formControlName="role">
+              <option value="">Select Role</option>
+              <option value="customer">Customer</option>
+              <option value="seller">Seller</option>
+            </select>
+            <div
+            *ngIf="f.role.touched && f.role.errors?.['required']"
+            class="text-danger"
+          >
+            Required
+          </div>
                 <button [disabled]="registerform.invalid" class="btn btn-primary mt-4 w-100" >Submit</button>
 
           </form>

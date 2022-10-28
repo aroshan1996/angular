@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
   rootUrl = 'https://jsonplaceholder.typicode.com/';
-  apiurl = 'http://localhost:3000/api/';
 
   private user$: Subject<any> = new Subject<any>();
   user = this.user$.asObservable();

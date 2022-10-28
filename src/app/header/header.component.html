@@ -24,8 +24,19 @@
             >
           </li>
           <li class="nav-item">
-            <div *ngIf="user">
+            <div *ngIf="user && role==='seller'">
               <a class="nav-link" routerLink="" (click)="logout()">Logout </a>
+            </div>
+            <div *ngIf="user && role==='customer'">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{token?.fullName}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" (click)="myCart()">My Cart</a>
+                  <a class="dropdown-item"  (click)="logout()">Logout</a>
+                </div>
+              </li>
             </div>
             <div *ngIf="!user">
               <a class="nav-link" routerLink="auth/login">Login </a>
@@ -37,3 +48,4 @@
     </div>
   </nav>
 </div>
+
