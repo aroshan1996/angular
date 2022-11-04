@@ -3,3 +3,26 @@
     cursor: pointer;
     font-style: italic;
 }
+.account .block {
+    background-color: #fff;
+    border: 1px solid #dedede;
+    padding: 30px;
+    margin: 100px 0;
+}
+.text-center {
+    text-align: center;
+}
+@media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+  }
+
+  .col-md-offset-3 {
+    margin-left: 25%;
+}

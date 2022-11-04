@@ -12,6 +12,7 @@ export class AuthService {
 
   private user$: Subject<any> = new Subject<any>();
   user = this.user$.asObservable();
+  
   getUsers() {
     return this.http.get(this.rootUrl + 'users');
   }

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +11,8 @@ import jwt_decode from "jwt-decode";
 })
 export class HeaderComponent implements OnInit {
   loggedIn: any = false;
-  role:any=''
-   token:any=''
+  role: any = '';
+  token: any = '';
 
   user!: Observable<boolean>;
   constructor(public authservice: AuthService, private route: Router) {}
@@ -20,10 +20,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authservice.user.subscribe((data) => {
       this.user = data;
-    this.role=JSON.parse(localStorage.getItem('role')!) 
-    
-    this.token= jwt_decode(localStorage.getItem('token')!) 
-    
+      this.role = JSON.parse(localStorage.getItem('role')!);
+      this.token = jwt_decode(localStorage.getItem('token')!);
     });
 
     this.maintain();
@@ -32,12 +30,17 @@ export class HeaderComponent implements OnInit {
   maintain() {
     if (localStorage.getItem('token')) {
       this.authservice.getuser(true);
-     
+
+      setInterval(() => {
+        if(this.token?.exp<=Math.floor((new Date).getTime() / 1000)){
+          this.logout();
+        }
+      }, 2000);
     }
   }
 
-  myCart(){
-    this.route.navigate(['mycart'])
+  myCart() {
+    this.route.navigate(['mycart']);
   }
 
   logout() {
@@ -46,4 +49,3 @@ export class HeaderComponent implements OnInit {
     this.route.navigate(['auth/login']);
   }
 }
-

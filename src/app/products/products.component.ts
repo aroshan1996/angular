@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonserviceService } from '../commonservice.service';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import decode from 'jwt-decode';
 
 interface ProductItem {
@@ -28,32 +28,45 @@ export class ProductsComponent implements OnInit {
   @Output() pageBoundsCorrection: EventEmitter<number> | undefined;
   category: string = '';
   price: number = 0;
-  size: number = 5;
-  page: number = 1;
+  size: number = 0;
+  page: number = 0;
   count: number = 0;
+  filter:string='';
+
+  
+  
   productlist: Product = [];
   baseurl = environment.imageurl;
   userid: any = decode(localStorage.getItem('token')!);
 
-  constructor(private services: CommonserviceService, private route: Router) {}
+  constructor(private services: CommonserviceService, private route: Router, private activeroute:ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.services
-      .getProducts(this.category, this.price, this.page, this.size)
-      .subscribe((response: any) => {
-        this.productlist = response.products;
-        this.count = response.count;
-      });
+    
+    this.activeroute.queryParams.subscribe(params=>{
+      this.filter=params?.['filter']
+      if(this.filter){
+        this.services
+        .getProducts(this.category, this.price, this.page, this.size,this.filter)
+        .subscribe((response: any) => {
+          console.log(response)
+          this.productlist = response?.data;
+          // this.count = response.count;
+        });
+      }
+      
+    })
+    
   }
 
   pageChanged(event: any) {
     this.page = event;
-    this.services
-      .getProducts(this.category, this.price, this.page, this.size)
-      .subscribe((response: any) => {
-        this.productlist = response.products;
-        this.count = response.count;
-      });
+    // this.services
+    //   .getProducts(this.category, this.price, this.page, this.size)
+    //   .subscribe((response: any) => {
+    //     this.productlist = response.products;
+    //     this.count = response.count;
+    //   });
   }
 
   productdetail(id: any) {
@@ -68,6 +81,11 @@ export class ProductsComponent implements OnInit {
 
     this.services.addtoCart(data).subscribe((response: any) => {
       console.log(response);
+      this.services.cart(true)
     });
+  }
+
+  details(id:string|undefined){
+this.route.navigate(['product',id])
   }
 }

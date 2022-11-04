@@ -1,0 +1,34 @@
+.tabCommon .tab-content {
+    padding: 20px;
+    border: 1px solid #dedede;
+}
+p {
+    font-family: "Poppins", sans-serif;
+    color: #757575;
+    font-size: 15px;
+}
+.tab-content>.active {
+    display: block;
+}
+.fade.in {
+    opacity: 1;
+}
+.tabCommon .nav-tabs li {
+    margin-right: 5px;
+}
+.nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+.nav>li {
+    position: relative;
+    display: block;
+}
+.tabCommon .nav-tabs li.active a {
+    background-color: #000;
+    border: 1px solid #000;
+    color: #ffffff;
+}
+.image{
+    width: 100%;
+}

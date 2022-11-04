@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-3"></div>
   <div class="col-md-6">
     <h3 class="text-center">Login</h3>
@@ -44,7 +44,47 @@
         Login
       </button>
     </form>
+    
   </div>
 
   <div class="col-md-3"></div>
-</div>
+</div> -->
+<section class="signin-page account">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="loginform" (ngSubmit)="onSubmit(loginform)">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="block text-center">
+            <a class="logo" href="index.html">
+              <img src="images/logo.png" alt="">
+            </a>
+            <h2 class="text-center">Welcome Back</h2>
+            <div class="form-group">
+              <input type="text" formControlName="email" name="email" id="email" class="form-control"
+                placeholder="Enter Email">
+              <div *ngIf="f.email.touched && f.email.errors?.['required']" class="text-danger">
+                Required
+              </div>
+              <div *ngIf="f.email.touched && f.email.errors?.['email']" class="text-danger">
+                Invalid email
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password" formControlName="password" name="password" id="password" class="form-control"
+                placeholder=" Enter Password">
+              <div *ngIf="f.password.touched && f.password.errors?.['required']" class="text-danger">
+                Required
+              </div>
+            </div>
+            <div class="text-center">
+              <button [disabled]="loginform.invalid" class="btn btn-dark mt-4 w-100">
+                Login
+              </button>
+            </div>
+            <p class="mt-20">New in this site ?<a href="signin.html"> Create New Account</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
